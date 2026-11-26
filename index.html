@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KEY VIBES: keyboard sounds for Windows and Ubuntu</title>
+<meta name="description" content="KEY VIBES plays a satisfying sound on every keystroke, in every app. 20 sound packs, works offline, 14-day free trial. For Windows and Ubuntu.">
+<meta property="og:title" content="KEY VIBES: keyboard sounds for Windows and Ubuntu">
+<meta property="og:description" content="A satisfying sound on every keystroke, in every app. 20 sound packs, works offline, 14-day free trial.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#15121a">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Bricolage";src:url(fonts/bricolage.woff2) format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:"JBMono";src:url(fonts/jbmono.woff2) format("woff2");font-weight:600;font-display:swap}
+
+:root{
+  --bg:#15121a; --panel:#1d1923; --panel-2:#25202d; --line:#342e3f;
+  --text:#f4eee8; --muted:#b9afc4; --brand:#b476ff; --on-brand:#15121a;
+  --accent:#b476ff;            /* changes with the selected pack */
+  --ok:#5fd38a;
+  --sans:"Bricolage","Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;
+  --mono:"JBMono","Cascadia Mono",ui-monospace,monospace;
+  --wrap:1120px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1.0625rem/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--brand);outline-offset:3px;border-radius:6px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--brand);color:var(--on-brand);padding:8px 14px;border-radius:8px;z-index:20}
+.skip:focus{left:8px}
+
+/* header */
+header.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:28px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.01em;text-decoration:none;font-size:1.05rem}
+.brand img{width:30px;height:30px;border-radius:8px}
+nav.main{display:flex;gap:22px;margin-left:auto;font-size:.97rem}
+nav.main a{text-decoration:none;color:var(--muted)}
+nav.main a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 22px;border-radius:12px;font:600 1rem var(--sans);text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:transform .12s ease,background .15s ease}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--brand);color:var(--on-brand)}
+.btn.primary:hover{background:#c58cff}
+.btn.ghost{border-color:var(--line);color:var(--text);background:transparent}
+.btn.ghost:hover{border-color:var(--muted)}
+.btn.small{min-height:38px;padding:0 16px;font-size:.93rem}
+
+/* hero */
+.hero{padding:72px 0 40px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto 30%;height:80%;background:radial-gradient(closest-side,color-mix(in srgb,var(--accent) 32%,transparent),transparent);opacity:.55;transition:background .5s ease;pointer-events:none}
+.hero .wrap{position:relative}
+h1{font-size:clamp(2.6rem,6.4vw,5.2rem);line-height:1.02;letter-spacing:-.03em;font-weight:700;margin:0 0 22px;max-width:15ch;font-variation-settings:"wdth" 90}
+.lede{font-size:1.25rem;line-height:1.5;color:var(--muted);max-width:44ch;margin:0 0 30px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.fine{color:var(--muted);font-size:.93rem;margin:14px 0 0}
+
+/* live demo */
+.demo{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:22px;position:relative}
+.packbar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;padding:0;border:0}
+.packbar legend{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.packbar label{cursor:pointer}
+.packbar input{position:absolute;opacity:0;pointer-events:none}
+.packbar span{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 15px;border-radius:999px;border:1.5px solid var(--line);font-size:.95rem;font-weight:500;color:var(--muted);transition:border-color .15s,color .15s,background .15s}
+.packbar span i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.packbar label:hover span{color:var(--text)}
+.packbar input:checked + span{border-color:var(--c);color:var(--text);background:color-mix(in srgb,var(--c) 16%,transparent)}
+.packbar input:focus-visible + span{outline:3px solid var(--brand);outline-offset:3px}
+.field{display:block;width:100%;min-height:58px;padding:14px 18px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg);color:var(--text);font:500 1.15rem var(--sans);margin-bottom:18px}
+.field::placeholder{color:#8f859b}
+.field:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 25%,transparent)}
+.kb{display:grid;gap:7px;user-select:none;-webkit-user-select:none}
+.kb .row{display:flex;gap:7px;justify-content:center}
+.key{flex:0 1 52px;min-width:0;height:52px;border-radius:10px;background:var(--panel-2);border:1px solid var(--line);border-bottom:4px solid #151119;color:var(--muted);font:600 .86rem var(--mono);cursor:pointer;display:grid;place-items:center;padding:0;transition:transform .06s ease,border-bottom-width .06s ease,background .2s ease,box-shadow .2s ease}
+.key.wide{flex:0 1 92px}
+.key.space{flex:0 1 360px}
+.key.down{transform:translateY(3px);border-bottom-width:1px;background:color-mix(in srgb,var(--accent) 38%,var(--panel-2));color:var(--text);box-shadow:0 0 22px color-mix(in srgb,var(--accent) 55%,transparent)}
+.hint{color:var(--muted);font-size:.93rem;margin:16px 2px 0}
+.hint b{color:var(--text);font-weight:600}
+.loading{opacity:.6}
+
+/* sections */
+section{padding:84px 0}
+section.tint{background:linear-gradient(var(--panel),var(--panel));border-block:1px solid var(--line)}
+h2{font-size:clamp(1.9rem,3.8vw,2.9rem);line-height:1.08;letter-spacing:-.025em;font-weight:700;margin:0 0 14px;max-width:20ch}
+.sub{color:var(--muted);max-width:56ch;margin:0 0 40px}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;border-top:2px solid var(--line);padding-top:18px}
+.steps li::before{content:counter(s);display:block;font:600 .95rem var(--mono);color:var(--brand);margin-bottom:10px}
+.steps h3{font-size:1.2rem;margin:0 0 6px}
+.steps p{margin:0;color:var(--muted)}
+kbd{font:600 .85em var(--mono);padding:2px 8px;border-radius:6px;background:var(--panel-2);border:1px solid var(--line);border-bottom-width:3px;color:var(--text)}
+
+/* packs */
+.groups{display:grid;grid-template-columns:repeat(3,1fr);gap:44px}
+.groups h3{font-size:1.15rem;margin:0 0 4px}
+.groups .gsub{color:var(--muted);font-size:.93rem;margin:0 0 16px}
+.plist{list-style:none;margin:0;padding:0}
+.plist li{display:grid;grid-template-columns:12px 1fr auto;gap:12px;align-items:start;padding:11px 0;border-top:1px solid var(--line)}
+.plist .dot{width:12px;height:12px;border-radius:50%;margin-top:.45em;background:var(--c)}
+.plist strong{display:block;font-weight:600;line-height:1.3}
+.plist small{display:block;color:var(--muted);font-size:.9rem;line-height:1.4;margin-top:2px}
+.play{align-self:center;min-height:34px;padding:0 13px;border-radius:999px;border:1.5px solid var(--line);background:transparent;color:var(--text);font:600 .85rem var(--sans);cursor:pointer}
+.play:hover{border-color:var(--c)}
+.free{font:600 .72rem var(--mono);color:var(--ok);margin-left:8px;white-space:nowrap}
+
+/* features */
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:34px 56px;margin:0;padding:0;list-style:none}
+.feat li{max-width:46ch}
+.feat h3{margin:0 0 4px;font-size:1.15rem}
+.feat p{margin:0;color:var(--muted)}
+
+/* pricing */
+.price{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start}
+.pricebox{background:var(--bg);border:1px solid var(--line);border-radius:22px;padding:30px}
+.amount{font-size:4.2rem;line-height:1;font-weight:700;letter-spacing:-.04em}
+.amount small{font-size:1.05rem;font-weight:500;color:var(--muted);letter-spacing:0;margin-left:8px}
+.pricebox ul{list-style:none;margin:22px 0 26px;padding:0;display:grid;gap:10px}
+.pricebox li{padding-left:28px;position:relative}
+.pricebox li::before{content:"";position:absolute;left:3px;top:.45em;width:12px;height:7px;border-left:2.5px solid var(--ok);border-bottom:2.5px solid var(--ok);transform:rotate(-45deg)}
+.pricebox .btn{width:100%}
+.price p{color:var(--muted);max-width:50ch}
+.price h3{margin:26px 0 6px;font-size:1.15rem}
+.price h3:first-child{margin-top:0}
+
+/* download */
+.dl{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.dlcard{border:1px solid var(--line);border-radius:18px;padding:24px;background:var(--panel)}
+.dlcard h3{margin:0 0 4px;font-size:1.25rem}
+.dlcard p{margin:0 0 18px;color:var(--muted)}
+.dlcard .btns{display:flex;flex-wrap:wrap;gap:10px}
+code{font:600 .88em var(--mono);background:var(--panel-2);padding:2px 7px;border-radius:6px}
+.note{margin-top:22px;padding:16px 20px;border-radius:14px;border:1px solid #6b5420;background:#2f2610;color:#f3dc9b;max-width:78ch}
+
+/* faq */
+.faq{max-width:760px}
+details{border-top:1px solid var(--line)}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;list-style:none;padding:20px 40px 20px 0;font-weight:600;font-size:1.1rem;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:6px;top:50%;transform:translateY(-52%);font:500 1.6rem var(--sans);color:var(--muted);transition:transform .2s ease}
+details[open] summary::after{transform:translateY(-52%) rotate(45deg)}
+details p{margin:0 0 20px;color:var(--muted);max-width:62ch}
+
+footer{border-top:1px solid var(--line);padding:40px 0 56px;color:var(--muted);font-size:.95rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 40px;justify-content:space-between}
+footer a{color:var(--text)}
+
+@media (max-width:900px){
+  .groups,.steps,.dl,.feat,.price{grid-template-columns:1fr}
+  .groups{gap:36px}
+  nav.main{display:none}
+  .top .btn{margin-left:auto}
+  .key{height:44px;font-size:.78rem}
+  .kb .row{gap:5px}.kb{gap:5px}
+}
+@media (max-width:560px){
+  section{padding:60px 0}
+  .hero{padding-top:44px}
+  .key.space{flex-basis:200px}
+  .demo{padding:16px;border-radius:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="icon.png" alt="" width="30" height="30">KEY VIBES</a>
+    <nav class="main" aria-label="Main">
+      <a href="#packs">Sound packs</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#download">Download</a>
+      <a href="#faq">Questions</a>
+    </nav>
+    <a class="btn primary small" href="#pricing">Buy for $12</a>
+  </div>
+</header>
+
+<main id="main">
+<div class="hero" id="top">
+  <div class="wrap">
+    <h1>Make every keystroke feel good.</h1>
+    <p class="lede">KEY VIBES plays a satisfying sound each time you press a key, in every app. Soft taps, mechanical clacks, even a marimba under your fingers.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="#download">Download the free trial</a>
+      <a class="btn ghost" href="#pricing">Buy once for $12</a>
+    </div>
+    <p class="fine">For Windows 10/11 and Ubuntu. Works offline. 14 days with every pack unlocked.</p>
+
+    <div class="demo" id="demo">
+      <fieldset class="packbar" id="packbar">
+        <legend>Choose a sound pack to try</legend>
+      </fieldset>
+      <input class="field" id="field" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type here to hear it" aria-label="Type here to hear the selected sound pack">
+      <div class="kb" id="kb" aria-hidden="true"></div>
+      <p class="hint" id="hint">Pick a pack, then type. Sounds load when you choose a pack. This is a six-pack preview; the app has 20.</p>
+    </div>
+  </div>
+</div>
+
+<section id="how">
+  <div class="wrap">
+    <h2>Set up in a minute.</h2>
+    <p class="sub">KEY VIBES sits in your tray and listens only to know when a key was pressed.</p>
+    <ol class="steps">
+      <li><h3>Install it</h3><p>Run the Windows installer or install the Ubuntu package. It adds itself to your Start menu or Apps menu.</p></li>
+      <li><h3>Press Start</h3><p>Use the big switch in the window, the tray icon, or <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>K</kbd>.</p></li>
+      <li><h3>Type anywhere</h3><p>Documents, chat, code, games. Close the window and it keeps running in the tray.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="packs" class="tint">
+  <div class="wrap">
+    <h2>Twenty sound packs, all original.</h2>
+    <p class="sub">Each key makes its own sound, so Space always sounds like Space. Press Play to hear a pack here.</p>
+    <div class="groups" id="groups"></div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <h2>Made so fast typing still sounds good.</h2>
+    <p class="sub">The details that keep it from sounding robotic or getting in the way.</p>
+    <ul class="feat">
+      <li><h3>Choose which keys click</h3><p>Letters, Space and Enter each have a switch. Hear only Space and Enter if that's all you want.</p></li>
+      <li><h3>Left sounds left, right sounds right</h3><p>Spatial stereo pans each key to where it sits on your keyboard. Optional.</p></li>
+      <li><h3>Heavier keys sound heavier</h3><p>Space, Enter, Backspace and modifiers get deeper sounds of their own.</p></li>
+      <li><h3>Pianos play notes</h3><p>The piano and mallet packs play low to high across your keyboard.</p></li>
+      <li><h3>Add your own sounds</h3><p>Point KEY VIBES at a folder of .wav, .ogg, .mp3 or .flac files and it becomes a pack.</p></li>
+      <li><h3>Updates itself</h3><p>New versions download in the background and install when you restart. Your settings and licence carry over.</p></li>
+      <li><h3>Never records what you type</h3><p>No analytics and no logs. The app only checks for updates and, if you activate a key, your licence.</p></li>
+      <li><h3>Resizable and tidy</h3><p>The window adapts from small to full screen, remembers where you left it, and uninstalls from inside the app.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="pricing" class="tint">
+  <div class="wrap price">
+    <div>
+      <h2>Pay once. Keep it.</h2>
+      <p class="sub" style="margin-bottom:26px">Try everything for 14 days first. No account and no card needed to start the trial.</p>
+      <h3>After the trial</h3>
+      <p>Linear Red, Buckling Spring and Wood Block stay free forever. A licence key unlocks the other 17 packs.</p>
+      <h3>Refunds</h3>
+      <p>If it doesn't work as expected, or has a problem we can't fix, ask for a refund within 30 days. Details are shown at checkout.</p>
+      <h3>Payments</h3>
+      <p>Freemius processes your payment as seller of record and collects any tax or VAT. We never see your card details.</p>
+    </div>
+    <div class="pricebox">
+      <div class="amount">$12<small>one time</small></div>
+      <ul>
+        <li>All 20 sound packs, unlocked</li>
+        <li>No subscription</li>
+        <li>Works on 2 of your computers</li>
+        <li>Move it to a new computer by deactivating the old one</li>
+      </ul>
+      <a class="btn primary" href="https://checkout.freemius.com/app/45751/plan/81593/" rel="noopener">Buy KEY VIBES for $12</a>
+      <p class="fine" style="text-align:center">Your key arrives by email right after payment.</p>
+    </div>
+  </div>
+</section>
+
+<section id="download">
+  <div class="wrap">
+    <h2>Download KEY VIBES.</h2>
+    <p class="sub">The same download is the free trial. Enter your licence key in the app when you buy.</p>
+    <div class="dl">
+      <div class="dlcard">
+        <h3>Windows 10 and 11</h3>
+        <p>The installer asks you to accept the licence, then lets you choose where to install. A portable single file is also available.</p>
+        <div class="btns">
+          <a class="btn primary" href="https://github.com/Raveel123/key-vibes-releases/releases/latest" rel="noopener">Get the Windows installer</a>
+        </div>
+      </div>
+      <div class="dlcard">
+        <h3>Ubuntu and Linux</h3>
+        <p>A <code>.deb</code> package for Ubuntu and Debian, and an AppImage for other distributions.</p>
+        <div class="btns">
+          <a class="btn primary" href="https://github.com/Raveel123/key-vibes-releases/releases/latest" rel="noopener">Get the Ubuntu package</a>
+        </div>
+      </div>
+    </div>
+    <p class="note"><strong>Windows may show "Windows protected your PC".</strong> The installer isn't code-signed yet. Click <em>More info</em>, then <em>Run anyway</em>. The files are published only on this project's GitHub releases page.</p>
+    <p class="fine">On the releases page, open <em>Assets</em> and pick the file that ends in <code>Setup.exe</code> (Windows), <code>.deb</code> (Ubuntu) or <code>.AppImage</code> (other Linux).</p>
+  </div>
+</section>
+
+<section id="faq" class="tint">
+  <div class="wrap">
+    <h2>Questions.</h2>
+    <div class="faq" style="margin-top:34px">
+      <details><summary>Does it record what I type?</summary><p>No. KEY VIBES listens to keyboard events only to play a sound. It doesn't record, store or send what you type, and it has no analytics or logs.</p></details>
+      <details><summary>Does it need the internet?</summary><p>No. Sounds play offline. It checks for updates about once a day (you can turn that off). If you activate a licence key, it also confirms the key about once a week, and keeps working for 21 days if you're offline.</p></details>
+      <details><summary>Why does Windows warn me about the installer?</summary><p>The installer isn't code-signed yet, and Windows warns about new, unsigned apps. Choose <em>More info</em>, then <em>Run anyway</em>.</p></details>
+      <details><summary>Does it work on Ubuntu with Wayland?</summary><p>Yes. Wayland hides keystrokes from other apps, so KEY VIBES shows a <em>Grant access</em> button. It asks for your password once, then hears every keyboard, including ones you plug in later.</p></details>
+      <details><summary>Can I use it on a new computer?</summary><p>Your key works on two computers. To move one, choose <em>Deactivate this computer</em> in the app, then activate on the new one.</p></details>
+      <details><summary>What do I get after the trial if I don't buy?</summary><p>Linear Red, Buckling Spring and Wood Block keep working. Sound packs you add yourself are always free.</p></details>
+      <details><summary>How do I get help or a refund?</summary><p>Email <a href="mailto:raveel.office@gmail.com">raveel.office@gmail.com</a> with your purchase email. Refund requests within 30 days follow the policy shown at checkout.</p></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Copyright © 2026 Raveel. All rights reserved.<br>KEY VIBES is a trademark of its author; other names belong to their owners.</div>
+    <div>Support: <a href="mailto:raveel.office@gmail.com">raveel.office@gmail.com</a><br>Purchases are handled by <a href="https://freemius.com" rel="noopener">Freemius</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var DEMO = [
+    {id:"soft-tock", name:"Soft Tock", c:"#4F8CFF"},
+    {id:"deep-thock", name:"Deep Thock", c:"#A855F7"},
+    {id:"typewriter-strike", name:"Typewriter", c:"#E08A2E"},
+    {id:"water-drop", name:"Water Drops", c:"#0EA5E9"},
+    {id:"glass-tink", name:"Glass Tink", c:"#06B6D4"},
+    {id:"marimba", name:"Marimba", c:"#F59E0B"}
+  ];
+  var GROUPS = [
+    ["Soft & Smooth","Quiet, rounded and easy on the ears.",[
+      ["glass-tink","Glass Tink","Bright little clinks of glass","#06B6D4"],
+      ["pebble-tap","Pebble Tap","Round, smooth stone-on-stone taps","#F2A65A"],
+      ["soft-tock","Soft Tock","A crisp, gentle tap, clean and quick","#4F8CFF"],
+      ["water-drop","Water Drops","Gentle bubbles, every key a different drop","#0EA5E9"],
+      ["whisper-linear","Whisper Linear","Whisper-quiet keys for late nights","#8E9AAF"],
+      ["wood-tap","Wood Block","Dry, friendly wooden taps","#A16207",1]]],
+    ["Mechanical","Switches, springs and strikes.",[
+      ["buckling-spring","Buckling Spring","Old-school clack with a ringing spring","#64748B",1],
+      ["cherry-red","Linear Red","Smooth linear switch: a soft, warm bottom-out tock","#E5484D",1],
+      ["deep-thock","Deep Thock","Low, lubed, round thock","#A855F7"],
+      ["sharp-click","Sharp Click","Bright click, firm bottom-out","#14B8A6"],
+      ["topre-thud","Domed Thud","Deep, rounded, rubber-dome thup","#7C3AED"],
+      ["typewriter-strike","Typewriter","Metal strikes, and a bell on Enter","#E08A2E"]]],
+    ["Musical & Fun","Your keyboard as an instrument.",[
+      ["arcade-8bit","8-Bit Arcade","Coins, jumps, lasers and power-ups","#F97316"],
+      ["drum-pads","Drum Pads","Kick, snare, hats, toms and claps","#EF4444"],
+      ["electric-piano","Electric Piano","Mellow tine piano, low to high across the keyboard","#E11D48"],
+      ["harp","Harp","Plucked strings over four octaves","#10B981"],
+      ["kalimba","Kalimba","Soft thumb-piano plinks","#84CC16"],
+      ["marimba","Marimba","Warm wooden notes, low to high across the keyboard","#F59E0B"],
+      ["music-box","Music Box","Tiny tinkling tines","#EC4899"],
+      ["vibraphone","Vibraphone","Shimmering metal bars with a gentle vibrato","#38BDF8"]]]
+  ];
+  var ROWS = ["1234567890","QWERTYUIOP","ASDFGHJKL","ZXCVBNM"];
+  var demoIds = {}; DEMO.forEach(function(p){demoIds[p.id]=p;});
+
+  var Ctx = window.AudioContext || window.webkitAudioContext;
+  var ctx = null, cache = {}, current = DEMO[0], pending = {};
+
+  function audio(){ if(!ctx && Ctx){ ctx = new Ctx(); } if(ctx && ctx.state==="suspended"){ ctx.resume(); } return ctx; }
+
+  function load(name){
+    if(cache[name]) return Promise.resolve(cache[name]);
+    if(pending[name]) return pending[name];
+    var c = audio(); if(!c) return Promise.resolve(null);
+    pending[name] = fetch("sounds/"+name+".mp3").then(function(r){return r.arrayBuffer();})
+      .then(function(b){ return new Promise(function(res,rej){ c.decodeAudioData(b,res,rej); }); })
+      .then(function(buf){ cache[name]=buf; return buf; })
+      .catch(function(){ return null; });
+    return pending[name];
+  }
+  function names(pack){
+    if(pack.id==="marimba"){ var a=[]; for(var i=1;i<=9;i++) a.push("marimba-k"+("0"+i).slice(-2)); return a; }
+    return [1,2,3,4].map(function(i){return pack.id+"-k0"+i;}).concat([pack.id+"-space",pack.id+"-enter"]);
+  }
+  function preload(pack){
+    var panel = document.getElementById("demo"); panel.classList.add("loading");
+    audio();
+    Promise.all(names(pack).map(load)).then(function(){ panel.classList.remove("loading"); });
+  }
+  function play(name, rate, pan){
+    var buf = cache[name]; if(!buf){ load(name); return; }
+    var c = audio(); if(!c) return;
+    var s = c.createBufferSource(); s.buffer = buf; s.playbackRate.value = rate || 1;
+    var g = c.createGain(); g.gain.value = 0.9;
+    var node = s.connect(g);
+    if(c.createStereoPanner){ var p = c.createStereoPanner(); p.pan.value = pan||0; node.connect(p); p.connect(c.destination); }
+    else node.connect(c.destination);
+    s.start();
+  }
+  function hash(ch){ return ch.charCodeAt(0); }
+  function keyPos(ch){
+    for(var r=0;r<ROWS.length;r++){ var i=ROWS[r].indexOf(ch); if(i>=0) return {r:r,i:i,n:ROWS[r].length}; }
+    return null;
+  }
+  function sound(ch){
+    var pack = current;
+    if(ch===" ") return play(pack.id==="marimba" ? "marimba-k05" : pack.id+"-space", 1, 0);
+    if(ch==="Enter") return play(pack.id==="marimba" ? "marimba-k09" : pack.id+"-enter", 1, 0);
+    var up = ch.toUpperCase(), pos = keyPos(up);
+    var pan = pos ? ((pos.i/(pos.n-1))*2-1)*0.5 : 0;
+    if(pack.id==="marimba"){
+      var idx = pos ? Math.min(8, Math.round(((pos.i + pos.r*1.3)/(10+3.9))*8)) : hash(up)%9;
+      return play("marimba-k"+("0"+(idx+1)).slice(-2), 1, pan);
+    }
+    var v = (hash(up)%4)+1;
+    play(pack.id+"-k0"+v, 0.97+Math.random()*0.06, pan);
+  }
+
+  /* build pack chips */
+  var fs = document.getElementById("packbar");
+  DEMO.forEach(function(p,i){
+    var l = document.createElement("label");
+    l.innerHTML = '<input type="radio" name="pack" value="'+p.id+'"'+(i===0?" checked":"")+'><span style="--c:'+p.c+'"><i></i>'+p.name+'</span>';
+    fs.appendChild(l);
+  });
+  function setPack(id, focus){
+    current = demoIds[id]; document.documentElement.style.setProperty("--accent", current.c);
+    var inp = document.querySelector('#packbar input[value="'+id+'"]'); if(inp) inp.checked = true;
+    preload(current);
+    if(focus) document.getElementById("field").focus({preventScroll:true});
+  }
+  fs.addEventListener("change", function(e){ if(e.target.name==="pack") setPack(e.target.value,true); });
+
+  /* build keyboard */
+  var kb = document.getElementById("kb"), keyEls = {};
+  ROWS.forEach(function(row){
+    var d = document.createElement("div"); d.className="row";
+    row.split("").forEach(function(ch){
+      var b = document.createElement("button"); b.type="button"; b.tabIndex=-1; b.className="key"; b.textContent=ch; keyEls[ch]=b; d.appendChild(b);
+    });
+    kb.appendChild(d);
+  });
+  var last = document.createElement("div"); last.className="row";
+  var sp = document.createElement("button"); sp.type="button"; sp.tabIndex=-1; sp.className="key space"; sp.setAttribute("aria-label","Space"); keyEls[" "]=sp; last.appendChild(sp);
+  var en = document.createElement("button"); en.type="button"; en.tabIndex=-1; en.className="key wide"; en.textContent="Enter"; keyEls["Enter"]=en; last.appendChild(en);
+  kb.appendChild(last);
+
+  var field = document.getElementById("field");
+  function flash(ch){
+    var el = keyEls[ch] || keyEls[ch.toUpperCase()]; if(!el) return;
+    el.classList.add("down"); setTimeout(function(){ el.classList.remove("down"); }, 110);
+  }
+  field.addEventListener("focus", function(){ audio(); preload(current); });
+  field.addEventListener("keydown", function(e){
+    if(e.ctrlKey||e.metaKey||e.altKey||e.repeat) return;
+    if(e.key.length===1 || e.key==="Enter"){ sound(e.key); flash(e.key); }
+    else if(e.key==="Backspace"){ sound("x"); }
+  });
+  kb.addEventListener("click", function(e){
+    var b = e.target.closest(".key"); if(!b) return;
+    var ch = b.getAttribute("aria-label")==="Space" ? " " : b.textContent;
+    audio(); sound(ch.length===1?ch.toLowerCase():ch); flash(ch);
+    if(ch.length===1) field.value += ch.toLowerCase(); else if(ch==="Enter") field.value="";
+  });
+
+  /* pack list */
+  var gEl = document.getElementById("groups");
+  GROUPS.forEach(function(g){
+    var d = document.createElement("div");
+    var h = '<h3>'+g[0]+'</h3><p class="gsub">'+g[1]+'</p><ul class="plist">';
+    g[2].forEach(function(p){
+      var playable = demoIds[p[0]];
+      h += '<li style="--c:'+p[3]+'"><span class="dot"></span><span><strong>'+p[1]+(p[4]?'<span class="free">free forever</span>':'')+'</strong><small>'+p[2]+'</small></span>'+
+           (playable?'<button type="button" class="play" data-id="'+p[0]+'" aria-label="Play '+p[1]+'">Play</button>':'<span></span>')+'</li>';
+    });
+    d.innerHTML = h+'</ul>'; gEl.appendChild(d);
+  });
+  gEl.addEventListener("click", function(e){
+    var b = e.target.closest(".play"); if(!b) return;
+    audio(); setPack(b.dataset.id,false);
+    var seq = "hello".split(""), t = 0;
+    Promise.all(names(current).map(load)).then(function(){
+      seq.forEach(function(ch,i){ setTimeout(function(){ sound(ch); flash(ch); }, i*140); });
+    });
+  });
+  document.documentElement.style.setProperty("--accent", current.c);
+})();
+</script>
+</body>
+</html>

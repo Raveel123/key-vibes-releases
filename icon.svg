@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#40314f"/>
+      <stop offset="1" stop-color="#17141b"/>
+    </linearGradient>
+    <linearGradient id="capTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f6e7d6"/>
+    </linearGradient>
+    <linearGradient id="capSide" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d9a8f5"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="42%" r="55%">
+      <stop offset="0" stop-color="#a855f7" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#a855f7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="116" fill="url(#bg)"/>
+  <rect width="512" height="512" rx="116" fill="url(#glow)"/>
+  <!-- keycap: side, then top face -->
+  <rect x="112" y="156" width="288" height="262" rx="56" fill="url(#capSide)"/>
+  <rect x="112" y="126" width="288" height="262" rx="56" fill="url(#capTop)"/>
+  <rect x="142" y="156" width="228" height="202" rx="36" fill="none" stroke="#231f1d" stroke-opacity=".07" stroke-width="4"/>
+  <!-- K -->
+  <g fill="none" stroke="#231f1d" stroke-width="32" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M214 196 V318"/>
+    <path d="M300 192 L220 258"/>
+    <path d="M254 240 L304 320"/>
+  </g>
+  <!-- sound ripples -->
+  <g fill="none" stroke="#e9c9ff" stroke-width="14" stroke-linecap="round" opacity=".95">
+    <path d="M428 70 q22 22 0 44"/>
+    <path d="M452 54 q36 38 0 76" opacity=".6"/>
+  </g>
+</svg>
